@@ -1,0 +1,7 @@
+https://github.com/nicksantamaria/example-terraform-aws-vpc-peering/blob/master/instances.tf 	---------vpc peering
+https://github.com/nicksantamaria/example-terraform-aws-vpc-peering/blob/master/variables.tf	
+https://github.com/ginocoates/rstudio-server-terraform/blob/master/main.tf		-------r server
+https://github.com/ginocoates/rstudio-server-terraform/blob/master/variables.tf		-- rserver 
+https://github.com/terraform-aws-modules/terraform-aws-elb/blob/master/main.tf 
+https://github.com/terraform-aws-modules/terraform-aws-autoscaling/blob/master/variables.tf		---------for configuring auto scaling 
+ 

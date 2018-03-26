@@ -1,0 +1,233 @@
+#!/bin/bash
+#Master data tables export jobs
+echo "Export of location translator data"
+
+sqoop job --create locexport -- export \
+--connect jdbc:mysql://auroarasbdsf-cluster.cluster-cbbuvqpk5p7o.us-east-1.rds.amazonaws.com/dl_complexmgmt  \
+--username dbuser \
+--password-file /user/$USER/.cmaurorapwd  \
+--input-fields-terminated-by ',' \
+--lines-terminated-by '\n' \
+--input-null-string "\\\\N" --input-null-non-string "\\\\N" \
+-m 10  \
+--table dl_loctranslator  \
+--export-dir s3://dlaggregatedzone/LOOKUPTABLES/LOCATION
+
+echo "Export of fiscalcalendar data"
+
+sqoop job --create fiscalcalexport -- export \
+--connect jdbc:mysql://auroarasbdsf-cluster.cluster-cbbuvqpk5p7o.us-east-1.rds.amazonaws.com/dl_complexmgmt  \
+--username dbuser \
+--password-file /user/$USER/.cmaurorapwd  \
+--input-fields-terminated-by ',' \
+--lines-terminated-by '\n' \
+--input-null-string "\\\\N" --input-null-non-string "\\\\N" \
+-m 10  \
+--table dl_fiscalcalendar  \
+--export-dir s3://dlaggregatedzone/FiscalCalendar
+
+echo "Export of sosagg data"
+
+sqoop job --create sosaggexport -- export \
+--connect jdbc:mysql://auroarasbdsf-cluster.cluster-cbbuvqpk5p7o.us-east-1.rds.amazonaws.com/dl_complexmgmt  \
+--username dbuser \
+--password-file /user/$USER/.cmaurorapwd  \
+--input-fields-terminated-by ',' \
+--lines-terminated-by '\n' \
+--input-null-string "\\\\N" --input-null-non-string "\\\\N" \
+-m 10  \
+--table dl_sosagg  \
+--export-dir s3://dlaggregatedzone/LOOKUPTABLES/SOURCEOFSUPPLYAGG
+
+echo "Export of sosagg data"
+
+sqoop job --create sosaggexport -- export \
+--connect jdbc:mysql://auroarasbdsf-cluster.cluster-cbbuvqpk5p7o.us-east-1.rds.amazonaws.com/dl_complexmgmt  \
+--username dbuser \
+--password-file /user/$USER/.cmaurorapwd  \
+--input-fields-terminated-by ',' \
+--lines-terminated-by '\n' \
+--input-null-string "\\\\N" --input-null-non-string "\\\\N" \
+-m 10  \
+--table dl_sosagg  \
+--export-dir s3://dlaggregatedzone/LOOKUPTABLES/SOURCEOFSUPPLYAGG
+
+echo "Export of preferredvendor data"
+
+sqoop job --create prefvendexport -- export \
+--connect jdbc:mysql://auroarasbdsf-cluster.cluster-cbbuvqpk5p7o.us-east-1.rds.amazonaws.com/dl_complexmgmt  \
+--username dbuser \
+--password-file /user/$USER/.cmaurorapwd  \
+--input-fields-terminated-by ',' \
+--lines-terminated-by '\n' \
+--input-null-string "\\\\N" --input-null-non-string "\\\\N" \
+-m 10  \
+--table dl_preferredvendor  \
+--export-dir s3://dlaggregatedzone/LOOKUPTABLES/PREFERREDVENDOR/
+
+echo "Export of GPPHierarchy data"
+
+sqoop job --create Gpphierexport -- export \
+--connect jdbc:mysql://auroarasbdsf-cluster.cluster-cbbuvqpk5p7o.us-east-1.rds.amazonaws.com/dl_complexmgmt  \
+--username dbuser \
+--password-file /user/$USER/.cmaurorapwd  \
+--input-fields-terminated-by ',' \
+--lines-terminated-by '\n' \
+--input-null-string "\\\\N" --input-null-non-string "\\\\N" \
+-m 10  \
+--table dl_Gpphierearchy   \
+--export-dir s3://dlaggregatedzone/LOOKUPTABLES/GPPHIEREARCHY
+
+echo "Export of sourceofsupply data"
+
+sqoop job --create sourceofsupplyexport -- export \
+--connect jdbc:mysql://auroarasbdsf-cluster.cluster-cbbuvqpk5p7o.us-east-1.rds.amazonaws.com/dl_complexmgmt  \
+--username dbuser \
+--password-file /user/$USER/.cmaurorapwd  \
+--input-fields-terminated-by ',' \
+--lines-terminated-by '\n' \
+--input-null-string "\\\\N" --input-null-non-string "\\\\N" \
+-m 10  \
+--table dl_sourceofsupply   \
+--export-dir s3://dlaggregatedzone/LOOKUPTABLES/SOURCEOFSUPPLY/
+
+#Forecast dashboard export data jobs
+
+echo "Export of Demand shipment data"
+
+sqoop job --create DemandShipmentexport -- export \
+--connect jdbc:mysql://auroarasbdsf-cluster.cluster-cbbuvqpk5p7o.us-east-1.rds.amazonaws.com/dl_complexmgmt  \
+--username dbuser \
+--password-file /user/$USER/.cmaurorapwd  \
+--input-fields-terminated-by '~' \
+--lines-terminated-by '\n' \
+--input-null-string "\\\\N" --input-null-non-string "\\\\N" \
+-m 10  \
+--table dl_F_demandshipment  \
+--export-dir s3://dlaggregatedzone/DENORMDATASETS/DEMANDSHIPMENT
+
+#Status dashboard export data jobs
+
+echo "Export of Material current status data"
+
+sqoop job --create MaterialCurrDayStatusExp -- export \
+--connect jdbc:mysql://auroarasbdsf-cluster.cluster-cbbuvqpk5p7o.us-east-1.rds.amazonaws.com/dl_complexmgmt  \
+--username dbuser \
+--password-file /user/$USER/.cmaurorapwd  \
+--input-fields-terminated-by '~' \
+--lines-terminated-by '\n' \
+--input-null-string "\\\\N" --input-null-non-string "\\\\N" \
+-m 10  \
+--table dl_materialcurrentstatus  \
+--export-dir s3://dlaggregatedzone/DENORMDATASETS/STATUSDASHBOARD/MATERIALCURRENTSTATUS
+
+echo "Export of Material additional attributes data"
+
+sqoop job --create MaterialAttbsExp -- export \
+--connect jdbc:mysql://auroarasbdsf-cluster.cluster-cbbuvqpk5p7o.us-east-1.rds.amazonaws.com/dl_complexmgmt  \
+--username dbuser \
+--password-file /user/$USER/.cmaurorapwd  \
+--input-fields-terminated-by '~' \
+--lines-terminated-by '\n' \
+--input-null-string "\\\\N" --input-null-non-string "\\\\N" \
+-m 10  \
+--table dl_Materialaddlattributes  \
+--export-dir s3://dlaggregatedzone/DENORMDATASETS/STATUSDASHBOARD/MATERIALATTRIBUTES
+
+echo "Export of Aggregate material data"
+
+sqoop job --create AggMaterialStatusExp -- export \
+--connect jdbc:mysql://auroarasbdsf-cluster.cluster-cbbuvqpk5p7o.us-east-1.rds.amazonaws.com/dl_complexmgmt  \
+--username dbuser \
+--password-file /user/$USER/.cmaurorapwd  \
+--input-fields-terminated-by '~' \
+--lines-terminated-by '\n' \
+--input-null-string "\\\\N" --input-null-non-string "\\\\N" \
+-m 10  \
+--table dl_Aggmaterialstatuscounts  \
+--export-dir s3://dlaggregatedzone/DENORMDATASETS/STATUSDASHBOARD/AGGMATERIALCURRENTSTATUS
+
+echo "Update of material history data from material current status"
+
+sqoop job --create Materialhistoryload -- eval \
+--connect jdbc:mysql://auroarasbdsf-cluster.cluster-cbbuvqpk5p7o.us-east-1.rds.amazonaws.com/dl_complexmgmt  \
+--username dbuser \
+--password-file /user/$USER/.cmaurorapwd  \
+-e "insert into dl_materialhistorystatus select * from dl_materialcurrentstatus where concat(extractdate,'-',materialcd,'-',loc) not in (SELECT distinct concat(extractdate,'-',materialcd,'-',loc) FROM dl_materialhistorystatus); "
+
+#BOM dashboard export data jobs
+
+echo "Export of BOM Analysis data"
+
+sqoop job --create BOMAnalysisExp -- export \
+--connect jdbc:mysql://auroarasbdsf-cluster.cluster-cbbuvqpk5p7o.us-east-1.rds.amazonaws.com/dl_complexmgmt  \
+--username dbuser \
+--password-file /user/$USER/.cmaurorapwd  \
+--input-fields-terminated-by '~' \
+--lines-terminated-by '\n' \
+--input-null-string "\\\\N" --input-null-non-string "\\\\N" \
+-m 10  \
+--table dl_BOMAnalysis  \
+--export-dir s3://dlaggregatedzone/DENORMDATASETS/BOMANALYSIS
+
+echo "Export of Whereused Analysis data"
+
+sqoop job --create Whereusedanalysis -- export \
+--connect jdbc:mysql://auroarasbdsf-cluster.cluster-cbbuvqpk5p7o.us-east-1.rds.amazonaws.com/dl_complexmgmt  \
+--username dbuser \
+--password-file /user/$USER/.cmaurorapwd  \
+--input-fields-terminated-by '~' \
+--lines-terminated-by '\n' \
+--input-null-string "\\\\N" --input-null-non-string "\\\\N" \
+-m 10  \
+--table dl_whereusedanalysis  \
+--export-dir s3://dlaggregatedzone/DENORMDATASETS/BOMWHEREUSED/WHEREUSEDANALYSIS
+
+echo "Export of Component in active bom data"
+
+sqoop job --create BOMIsActiveLoad -- export \
+--connect jdbc:mysql://auroarasbdsf-cluster.cluster-cbbuvqpk5p7o.us-east-1.rds.amazonaws.com/dl_complexmgmt  \
+--username dbuser \
+--password-file /user/$USER/.cmaurorapwd  \
+--input-fields-terminated-by '~' \
+--lines-terminated-by '\n' \
+--input-null-string "\\\\N" --input-null-non-string "\\\\N" \
+-m 10  \
+--table dl_ComponentInActiveBOM  \
+--export-dir s3://dlaggregatedzone/DENORMDATASETS/BOMWHEREUSED/INACTIVEBOM
+
+#LPS dashboard export data jobs
+
+sqoop job --create LPSMetricsexp -- export \
+--connect jdbc:mysql://auroarasbdsf-cluster.cluster-cbbuvqpk5p7o.us-east-1.rds.amazonaws.com/dl_complexmgmt  \
+--username dbuser \
+--password-file /user/$USER/.cmaurorapwd  \
+--input-fields-terminated-by '~' \
+--lines-terminated-by '\n' \
+--input-null-string "\\\\N" --input-null-non-string "\\\\N" \
+-m 10  \
+--table dl_LPSMetrics  \
+--export-dir s3://dlaggregatedzone/DENORMDATASETS/LPSDASHBOARD/LPSFINAL
+
+sqoop job --create NODMaterialsexport -- export \
+--connect jdbc:mysql://auroarasbdsf-cluster.cluster-cbbuvqpk5p7o.us-east-1.rds.amazonaws.com/dl_complexmgmt  \
+--username dbuser \
+--password-file /user/$USER/.cmaurorapwd  \
+--input-fields-terminated-by '~' \
+--lines-terminated-by '\n' \
+--input-null-string "\\\\N" --input-null-non-string "\\\\N" \
+-m 10  \
+--table dl_nodmaterials  \
+--export-dir s3://dlaggregatedzone/LOOKUPTABLES/NODMATERIALS
+
+
+sqoop job --create AligndemandExport -- export \
+--connect jdbc:mysql://auroarasbdsf-cluster.cluster-cbbuvqpk5p7o.us-east-1.rds.amazonaws.com/dl_complexmgmt  \
+--username dbuser \
+--password-file /user/$USER/.cmaurorapwd  \
+--input-fields-terminated-by '~' \
+--lines-terminated-by '\n' \
+--input-null-string "\\\\N" --input-null-non-string "\\\\N" \
+-m 10  \
+--table dl_F_AlignDemand \
+--export-dir s3://dlaggregatedzone/DENORMDATASETS/ALIGNDEMAND

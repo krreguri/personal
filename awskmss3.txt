@@ -1,0 +1,72 @@
+
+resource "aws_s3_bucket" "main" {
+ bucket = "${var.name}"
+ acl    = "${var.acl}"
+
+versioning {
+  enabled = "${var.enable_versioning}"
+}
+tags = "${var.tags}"
+  #   lifecycle = "${var.lifecycle}"
+
+  server_side_encryption_configuration {
+    rule {
+      apply_server_side_encryption_by_default {
+        kms_master_key_id = "${aws_kms_key.a.arn}"
+        sse_algorithm     = "aws:kms"
+      }
+    }
+  }
+}
+
+
+# Variables
+
+variable "name" {
+description = "bucket name"
+default     = "g9migration"
+}
+
+variable "acl" {
+  description = "bucket acl"
+  default     = "private"
+}
+
+variable "enable_versioning" {
+  description = "Enable Bucket Version"
+  default     = "true"
+}
+
+variable "tags" {
+  description = "tags"
+  default     = {
+     key = "name1"
+     value = "test"
+}
+}
+
+variable "lifecycle" {
+  description = "lifecycle"
+  default     = {}
+}
+#----------------------------------------------------
+
+
+#------------------------------
+
+resource "aws_kms_key" "a" {
+  description             = "KMS key 1"
+  deletion_window_in_days = 7
+
+  tags   {
+   Key-name =  "suprajkey"
+   }
+}
+
+
+resource "aws_kms_alias" "a" {
+  name          = "alias/g9"
+  target_key_id = "${aws_kms_key.a.key_id}"
+}
+
+

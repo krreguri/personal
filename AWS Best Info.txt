@@ -1,0 +1,11 @@
+https://aws.amazon.com/blogs/big-data/seven-tips-for-using-s3distcp-on-amazon-emr-to-move-data-efficiently-between-hdfs-and-amazon-s3/
+
+s3-dist-cp --src s3://datalakelandingdatazone/QADAR/new/ --dest s3://temp-sbd-prod-bucket/QADAR/ --multipartUploadChunkSize=1000
+
+https://blog.pythian.com/aws-redshift-cluster-sizing/
+https://www.flydata.com/blog/querying-free-disk-space-on-redshift/
+https://chartio.com/resources/tutorials/how-to-find-the-size-of-tables-schemas-and-databases-in-amazon-redshift/
+
+
+ps -A -o pid,lstart | fgrep -v " $( date '+%a %b %d' )" | cut -d' ' -f1
+
